@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
-app.use(express.json({ limit: '50mb' }));
-app.use(express.urlencoded())
+
+
 const cors = require('cors');
 
 module.exports = app;
@@ -15,6 +15,8 @@ const PORT = process.env.PORT || 4001;
 app.use(cors());
 
 // Add middware for parsing request bodies here:
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded());
 
 // Mount your existing apiRouter below at the '/api' path.
 const apiRouter = require('./server/api');

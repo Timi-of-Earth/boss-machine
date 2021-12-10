@@ -47,7 +47,7 @@ router.delete('/:minionId', (req, res, next) => {
     if (db.deleteFromDatabasebyId('minions', id) !== true) {
         res.status(404).send("Not found");
     } else {
-        res.status(204).send('Deleted');
+        res.status(204).send("Deleted");
     };
 });
 
