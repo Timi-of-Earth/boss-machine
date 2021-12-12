@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('./db');
+const checkMillionDollarIdea = require('./checkMillionDollarIdea');
 
 router.get('/', (req, res, next) => {
     const ideas = db.getAllFromDatabase('ideas');
@@ -16,16 +17,16 @@ router.get('/:ideaId', (req, res, send) => {
     };
 });
 
-router.post('/', (req, res, next) => {
+router.post('/',checkMillionDollarIdea ,(req, res, next) => {
     const newIdea = req.body;
-    if (typeof newIdea.name !== 'string' || typeof newIdea.description !== 'string' || !Number(newIdea.numWeeks) || !Number(newIdea.weeklyRevenue)) {
+    if (typeof newIdea.name !== 'string' || typeof newIdea.description !== 'string') {
         res.status(404).send('bad request');
     } else {
         res.status(201).send(db.addToDatabase('ideas', req.body));
     };
 });
 
-router.put('/:ideaId', (req, res, next) => {
+router.put('/:ideaId',checkMillionDollarIdea ,(req, res, next) => {
     const id = req.params.ideaId;
     const updatedIdea = req.body;
     updatedIdea.id = id;
